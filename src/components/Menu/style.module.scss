@@ -1,0 +1,70 @@
+@import "styles/mixins";
+
+.aside {
+  display: grid;
+  gap: 2px;
+  margin: 0 0 12px 0;
+  position: relative;
+}
+
+.aside::before {
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  content: "";
+  display: block;
+  filter: drop-shadow(0 0 2px rgba(#fff, 0.5));
+  height: 16px;
+  position: absolute;
+  right: 16px;
+  transform: rotate(45deg);
+  top: calc(100% - 8px);
+  width: 16px;
+  z-index: 1;
+}
+
+.listWrapper {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px 8px 0 0;
+  filter: drop-shadow(0 0 2px rgba(#fff, 0.5));
+  padding: 8px;
+}
+
+.snsList,
+.list {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: flex-start;
+}
+
+.snsList {
+  gap: 8px;
+}
+
+.socialIcon {
+  height: 36px !important;
+  width: 36px !important;
+}
+
+.navigation {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 8px 8px;
+  filter: drop-shadow(0 0 2px rgba(#fff, 0.5));
+  padding: 16px 16px 32px;
+}
+
+.list {
+  gap: 16px;
+}
+
+.item {
+  display: grid;
+  text-align: start;
+}
+
+.anchor {
+  @include format-reset;
+  font-size: 2rem;
+}

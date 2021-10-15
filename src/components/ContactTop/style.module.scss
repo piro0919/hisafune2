@@ -1,0 +1,46 @@
+@import "styles/mixins";
+
+.wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.formInner {
+  @include format-reset;
+  display: grid;
+  gap: 24px;
+  // TODO
+  height: 480px;
+  max-height: calc(100% - 64px * 2);
+  padding: 24px;
+}
+
+.fieldWrapper {
+  display: grid;
+  gap: 4px;
+}
+
+.required {
+  padding: 4px;
+}
+
+.input,
+.textarea {
+  background: #fff;
+  border: 1px solid #000;
+  outline: 0;
+  padding: 4px;
+}
+
+.textarea {
+  width: 360px;
+  overflow: scroll hidden;
+}
+
+.button {
+  background: #fff;
+  border: 1px solid #000;
+  justify-self: center;
+  padding: 16px 8px;
+}

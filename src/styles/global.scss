@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1&display=swap");
+
+:root {
+  direction: rtl;
+}
+
+html {
+  font: 62.5% "Shippori Mincho B1", serif;
+}
+
+body {
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  overflow: auto hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}

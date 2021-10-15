@@ -1,0 +1,21 @@
+.heading {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+.navigationWrapper {
+  bottom: 0;
+  display: grid;
+  gap: 2px;
+  margin: 24px;
+  position: fixed;
+  right: 0;
+  z-index: 1;
+}
+
+.button {
+  height: 48px;
+  position: relative;
+  width: 48px;
+}

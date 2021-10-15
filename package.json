@@ -1,22 +1,44 @@
 {
-  "name": "hisafune2",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
   "dependencies": {
+    "@react-hook/switch": "1.3.3",
+    "@react-hook/window-size": "3.0.7",
+    "dayjs": "1.10.7",
+    "framer-motion": "4.1.17",
+    "microcms-js-sdk": "1.2.0",
     "next": "11.1.2",
+    "next-seo": "4.28.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-contenteditable": "3.3.6",
+    "react-dom": "17.0.2",
+    "react-hook-form": "7.17.3",
+    "react-icons": "4.3.1",
+    "react-social-icons": "5.6.1",
+    "react-use-measure": "2.0.4",
+    "ress": "4.0.0",
+    "rooks": "5.7.2",
+    "sass": "1.32.12",
+    "sass-mq": "5.0.1",
+    "striptags": "3.2.0",
+    "swiper": "7.0.8",
+    "swr": "1.0.1"
   },
   "devDependencies": {
     "@types/react": "17.0.27",
+    "@typescript-eslint/eslint-plugin": "5.0.0",
+    "@typescript-eslint/parser": "4.33.0",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-css-modules": "2.11.0",
     "typescript": "4.4.3"
-  }
+  },
+  "name": "hisafune2",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "version": "0.1.0"
 }

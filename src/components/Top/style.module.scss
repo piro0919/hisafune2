@@ -1,0 +1,23 @@
+.wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.swiper {
+  height: 100%;
+  width: 100%;
+}
+
+.swiperSlide {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.imageWrapper {
+  filter: drop-shadow(16px 16px 16px rgba(#000, 0.5));
+  max-height: 920px;
+  max-width: 640px;
+  position: relative;
+}

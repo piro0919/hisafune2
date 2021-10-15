@@ -1,0 +1,42 @@
+@import "styles/mixins";
+
+.wrapper {
+  align-items: center;
+  display: flex;
+}
+
+.inner {
+  @include format-reset;
+  // TODO
+  height: 480px;
+  max-height: calc(100% - 64px * 2);
+  padding: 24px;
+}
+
+.prevPaginationWrapper {
+  padding: 0 0 0 24px;
+}
+
+.paginationWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list {
+  display: grid;
+  gap: 24px;
+}
+
+.anchor {
+  align-items: center;
+  display: grid;
+  grid-template: auto / 1fr auto;
+}
+
+.date {
+  font-size: 1.2rem;
+}
+
+.nextPaginationWrapper {
+  padding: 0 24px 0 0;
+}

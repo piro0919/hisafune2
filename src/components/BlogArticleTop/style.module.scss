@@ -1,0 +1,46 @@
+@import "styles/mixins";
+
+.wrapper {
+  align-items: center;
+  display: flex;
+}
+
+.article {
+  @include format-reset;
+  align-items: center;
+  display: grid;
+  gap: 24px 12px;
+  grid-template: "heading date" "articleWrapper articleWrapper" auto / 1fr auto;
+  // TODO
+  height: 480px;
+  max-height: calc(100% - 64px * 2);
+  padding: 24px;
+}
+
+.heading {
+  grid-area: heading;
+}
+
+.date {
+  font-size: 1.2rem;
+  grid-area: date;
+}
+
+.articleWrapper {
+  grid-area: articleWrapper;
+}
+
+.imageWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.articleWrapper img {
+  max-height: 80%;
+  max-width: 80vw;
+}
+
+.articleWrapper ul {
+  list-style: disc;
+  margin: 1.6rem 0 0;
+}

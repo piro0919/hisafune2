@@ -1,0 +1,27 @@
+@import "styles/mixins";
+
+.wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.article {
+  @include format-reset;
+  display: grid;
+  gap: 24px;
+  grid-template: "heading" "paragraph" auto / 1fr;
+  // TODO
+  height: 480px;
+  max-height: calc(100% - 64px * 2);
+  padding: 24px;
+  position: relative;
+}
+
+.heading {
+  grid-area: heading;
+}
+
+.paragraph {
+  grid-area: paragraph;
+}
