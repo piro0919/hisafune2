@@ -17,7 +17,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <meta content="initial-scale=1.0, width=device-width" name="viewport" />
+        <meta
+          content="initial-scale=1.0,minimum-scale=1.0,width=device-width"
+          name="viewport"
+        />
       </Head>
       <Layout>
         <Component {...pageProps} />
