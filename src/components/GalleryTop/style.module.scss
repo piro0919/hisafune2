@@ -1,0 +1,32 @@
+@import "styles/mixins";
+
+.wrapper {
+  align-items: center;
+  display: flex;
+}
+
+.inner {
+  @include format-reset;
+  display: grid;
+  gap: 24px;
+  // TODO
+  height: 640px;
+  max-height: calc(100% - 64px * 2);
+  padding: 24px;
+}
+
+.list {
+  display: grid;
+  gap: 8px;
+}
+
+.anchor {
+  aspect-ratio: 1;
+  display: block;
+  position: relative;
+}
+
+// .loaderWrapper {
+//   display: flex;
+//   justify-content: center;
+// }

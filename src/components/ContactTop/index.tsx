@@ -126,7 +126,7 @@ function ContactTop({ onSubmit }: ContactTopProps): JSX.Element {
             />
           </div>
           <button className={styles.button} type="submit">
-            送信する
+            <div className={styles.buttonInner}>送信する</div>
           </button>
         </div>
       </div>

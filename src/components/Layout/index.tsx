@@ -4,7 +4,7 @@ import { useRouter } from "next/dist/client/router";
 import React, { ReactNode, useEffect, useMemo } from "react";
 import { useOutsideClickRef } from "rooks";
 import useSwitch from "@react-hook/switch";
-import hoge from "./images/hoge.png";
+import menu from "./images/menu.png";
 import Image from "next/image";
 import styles from "./style.module.scss";
 
@@ -39,7 +39,7 @@ function Layout({ children }: LayoutProps): JSX.Element {
       <div className={styles.navigationWrapper} ref={ref}>
         {value ? <Menu /> : null}
         <button className={styles.button} onClick={toggle}>
-          <Image alt="" layout="fill" src={hoge} />
+          <Image alt="" layout="fill" src={menu} />
         </button>
       </div>
     </>

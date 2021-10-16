@@ -9,6 +9,7 @@ html {
 }
 
 body {
+  background: #f5f6f7;
   font-size: 1.6rem;
   letter-spacing: 1px;
   line-height: 1.5;
@@ -23,4 +24,12 @@ a {
 ol,
 ul {
   list-style: none;
+}
+
+.ReactModalPortal {
+  direction: ltr;
+}
+
+.ril__toolbar {
+  background: transparent !important;
 }

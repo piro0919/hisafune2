@@ -4,6 +4,8 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/lazy";
 import "swiper/css/pagination";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import "react-image-lightbox/style.css";
 import type { AppProps } from "next/app";
 import React from "react";
 import Head from "next/head";

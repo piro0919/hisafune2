@@ -14,3 +14,16 @@ type Contents<T> = {
   offset: number;
   totalCount: number;
 };
+
+type GALLERY = {
+  createdAt: string;
+  id: string;
+  image: {
+    height: number;
+    url: string;
+    width: number;
+  };
+  publishedAt: string;
+  revisedAt: string;
+  updatedAt: string;
+};
