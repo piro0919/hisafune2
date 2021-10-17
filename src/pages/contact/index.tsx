@@ -14,7 +14,7 @@ function Contact(): JSX.Element {
 
   return (
     <>
-      <Seo />
+      <Seo title="ご依頼等" />
       <ContactTop onSubmit={handleSubmit} />
     </>
   );
