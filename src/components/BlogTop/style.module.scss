@@ -1,4 +1,6 @@
+@import "styles/breakpoints";
 @import "styles/mixins";
+@import "sass-mq";
 
 .wrapper {
   align-items: center;
@@ -7,10 +9,14 @@
 
 .inner {
   @include format-reset;
-  // TODO
   height: 480px;
   max-height: calc(100% - 64px * 2);
-  padding: 24px;
+  @include mq($until: tablet) {
+    padding: 24px;
+  }
+  @include mq($from: tablet) {
+    padding: 24px 36px;
+  }
 }
 
 .prevPaginationWrapper {

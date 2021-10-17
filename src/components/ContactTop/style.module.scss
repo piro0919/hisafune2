@@ -10,7 +10,6 @@
   @include format-reset;
   display: grid;
   gap: 24px;
-  // TODO
   height: 480px;
   max-height: calc(100% - 64px * 2);
   padding: 24px;
@@ -19,6 +18,7 @@
 .fieldWrapper {
   display: grid;
   gap: 4px;
+  position: relative;
 }
 
 .required {
@@ -36,6 +36,32 @@
 .textarea {
   width: 360px;
   overflow: scroll hidden;
+}
+
+.errorWrapper {
+  background: #f00;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1.4rem;
+  margin: 0 8px 0 0;
+  padding: 12px 2px;
+  position: absolute;
+  right: 100%;
+  top: 0;
+  z-index: 1;
+}
+
+.errorWrapper::before {
+  background: inherit;
+  content: "";
+  display: block;
+  height: 8px;
+  margin: 12px -4px 0 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: rotate(45deg);
+  width: 8px;
 }
 
 .button {

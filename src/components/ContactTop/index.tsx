@@ -5,6 +5,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import useMeasure from "react-use-measure";
 import striptags from "striptags";
 import styles from "./style.module.scss";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import "yup-phone";
 
 type FieldValues = {
   body: string;
@@ -18,6 +21,40 @@ export type ContactTopProps = {
   onSubmit: SubmitHandler<FieldValues>;
 };
 
+const phoneSchema = yup.string().phone("JP", undefined);
+
+const schema = yup.object().shape(
+  {
+    body: yup.string().required("ご依頼内容を入力してください"),
+    email: yup
+      .string()
+      .when("tel", {
+        is: (tel: string) => tel.length,
+        then: yup.string(),
+        otherwise: yup
+          .string()
+          .required("電話番号またはメールアドレスを入力してください"),
+      })
+      .email("メールアドレスの形式で入力してください"),
+    name: yup.string().required("お名前を入力してください"),
+    subject: yup.string(),
+    tel: yup
+      .string()
+      // TODO: エラーを吐く
+      // .when("email", {
+      //   is: (email: string) => email.length,
+      //   then: yup.string(),
+      //   otherwise: yup
+      //     .string()
+      //     .required("電話番号またはメールアドレスを入力してください"),
+      // })
+      .test("test-tel", "電話番号の形式で入力してください", (value) =>
+        value ? phoneSchema.isValidSync(value) : true
+      ),
+  },
+  [["email", "tel"]]
+);
+
 function ContactTop({ onSubmit }: ContactTopProps): JSX.Element {
   const [width, height] = useWindowSize();
   const [ref, { width: innerWidth }] = useMeasure();
@@ -28,7 +65,13 @@ function ContactTop({ onSubmit }: ContactTopProps): JSX.Element {
     }),
     [height, innerWidth, width]
   );
-  const { handleSubmit, register, setValue, watch } = useForm<FieldValues>({
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+    setValue,
+    watch,
+  } = useForm<FieldValues>({
     defaultValues: {
       body: "",
       email: "",
@@ -36,6 +79,7 @@ function ContactTop({ onSubmit }: ContactTopProps): JSX.Element {
       subject: "",
       tel: "",
     },
+    resolver: yupResolver(schema),
   });
   const handleChangeWithStripTags = useCallback<Props["onChange"]>(
     ({ currentTarget: { id }, target: { value } }) => {
@@ -69,7 +113,7 @@ function ContactTop({ onSubmit }: ContactTopProps): JSX.Element {
               <abbr className={styles.required}>*</abbr>
             </label>
             <ContentEditable
-              {...register("name", { required: true })}
+              {...register("name")}
               className={styles.input}
               contentEditable={true}
               html={watch("name")}
@@ -77,6 +121,9 @@ function ContactTop({ onSubmit }: ContactTopProps): JSX.Element {
               innerRef={innerRef}
               onChange={handleChangeWithStripTags}
             />
+            {errors.name ? (
+              <div className={styles.errorWrapper}>{errors.name.message}</div>
+            ) : null}
           </div>
           <div className={styles.fieldWrapper}>
             <label htmlFor="subject">件名</label>
@@ -88,6 +135,11 @@ function ContactTop({ onSubmit }: ContactTopProps): JSX.Element {
               id="subject"
               onChange={handleChangeWithStripTags}
             />
+            {errors.subject ? (
+              <div className={styles.errorWrapper}>
+                {errors.subject.message}
+              </div>
+            ) : null}
           </div>
           <div className={styles.fieldWrapper}>
             <label htmlFor="tel">ご連絡先（電話番号）</label>
@@ -99,6 +151,9 @@ function ContactTop({ onSubmit }: ContactTopProps): JSX.Element {
               id="tel"
               onChange={handleChangeWithStripTags}
             />
+            {errors.tel ? (
+              <div className={styles.errorWrapper}>{errors.tel.message}</div>
+            ) : null}
           </div>
           <div className={styles.fieldWrapper}>
             <label htmlFor="email">ご連絡先（メールアドレス）</label>
@@ -110,6 +165,9 @@ function ContactTop({ onSubmit }: ContactTopProps): JSX.Element {
               id="email"
               onChange={handleChangeWithStripTags}
             />
+            {errors.email ? (
+              <div className={styles.errorWrapper}>{errors.email.message}</div>
+            ) : null}
           </div>
           <div className={styles.fieldWrapper}>
             <label htmlFor="body">
@@ -117,13 +175,16 @@ function ContactTop({ onSubmit }: ContactTopProps): JSX.Element {
               <abbr className={styles.required}>*</abbr>
             </label>
             <ContentEditable
-              {...register("body", { required: true })}
+              {...register("body")}
               className={styles.textarea}
               contentEditable={true}
               html={watch("body")}
               id="body"
               onChange={handleChange}
             />
+            {errors.body ? (
+              <div className={styles.errorWrapper}>{errors.body.message}</div>
+            ) : null}
           </div>
           <button className={styles.button} type="submit">
             <div className={styles.buttonInner}>送信する</div>

@@ -37,7 +37,18 @@ function Layout({ children }: LayoutProps): JSX.Element {
         </motion.main>
       </AnimatePresence>
       <div className={styles.navigationWrapper} ref={ref}>
-        {value ? <Menu /> : null}
+        <AnimatePresence>
+          {value ? (
+            <motion.div
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              initial={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <Menu />
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
         <button className={styles.button} onClick={toggle}>
           <Image alt="" layout="fill" src={menu} />
         </button>

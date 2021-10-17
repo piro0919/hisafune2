@@ -43,15 +43,20 @@ function BlogTop({
   >(`/api/blogs?page=${pageNumber}`, fetcher, { revalidateOnFocus: false });
   const items = useMemo(
     () =>
-      contents.map(({ id, publishedAt, title }) => (
+      contents.map(({ id, publishedAt, title }, index) => (
         <li key={id}>
-          <Link href={`/blog/article/${id}`}>
-            <a className={styles.anchor}>
+          <Link href={`/blog/article/${id}`} passHref={true}>
+            <motion.a
+              animate={{ opacity: 1 }}
+              className={styles.anchor}
+              initial={{ opacity: 0 }}
+              transition={{ delay: index * 0.1, duration: 1 }}
+            >
               <h2>{title}</h2>
               <span className={styles.date}>
                 {dayjs(publishedAt).format("YYYY.MM.DD")}
               </span>
-            </a>
+            </motion.a>
           </Link>
         </li>
       )),

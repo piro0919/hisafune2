@@ -1,4 +1,6 @@
+@import "styles/breakpoints";
 @import "styles/mixins";
+@import "sass-mq";
 
 .wrapper {
   align-items: center;
@@ -11,10 +13,14 @@
   display: grid;
   gap: 24px 12px;
   grid-template: "heading date" "articleWrapper articleWrapper" auto / 1fr auto;
-  // TODO
   height: 640px;
   max-height: calc(100% - 64px * 2);
-  padding: 24px;
+  @include mq($until: tablet) {
+    padding: 24px;
+  }
+  @include mq($from: tablet) {
+    padding: 24px 36px;
+  }
 }
 
 .heading {
@@ -30,9 +36,10 @@
   grid-area: articleWrapper;
 }
 
-.imageWrapper {
+.anchor {
   cursor: pointer;
   display: flex;
+  filter: drop-shadow(4px 4px 4px rgba(#000, 0.25));
   justify-content: center;
 }
 

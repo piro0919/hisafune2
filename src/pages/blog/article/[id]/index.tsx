@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { SWRConfig } from "swr";
 import Lightbox, { ILightBoxProps } from "react-image-lightbox";
+import { useRouter } from "next/router";
 
 const BlogArticleTop = dynamic(() => import("components/BlogArticleTop"), {
   ssr: false,
@@ -13,18 +14,23 @@ const BlogArticleTop = dynamic(() => import("components/BlogArticleTop"), {
 
 export type IdProps = Pick<BlogArticleTopProps, "id"> &
   Required<Pick<SeoProps, "title">> & {
+    article: string;
     fallback: {
       [key: string]: Pick<Blog, "article" | "publishedAt" | "title">;
     };
   };
 
-function Id({ fallback, id, title }: IdProps): JSX.Element {
+function Id({ article, fallback, id, title }: IdProps): JSX.Element {
+  const {
+    query: { imageid },
+    ...router
+  } = useRouter();
   const [mainSrc, setMainSrc] = useState<ILightBoxProps["mainSrc"]>();
   const handleCloseRequest = useCallback<
     ILightBoxProps["onCloseRequest"]
   >(() => {
-    setMainSrc(undefined);
-  }, []);
+    router.push(`/blog/article/${id}`, undefined, { scroll: false });
+  }, [id, router]);
 
   useEffect(() => {
     const body = document.getElementsByTagName("body")[0];
@@ -32,11 +38,47 @@ function Id({ fallback, id, title }: IdProps): JSX.Element {
     body.style.overflowX = typeof mainSrc === "string" ? "hidden" : "auto";
   }, [mainSrc]);
 
+  useEffect(() => {
+    if (typeof imageid !== "string") {
+      setMainSrc(undefined);
+
+      return;
+    }
+
+    const images = article.match(/<img.*?>/g);
+
+    if (!Array.isArray(images)) {
+      router.replace(`/blog/article/${id}`);
+
+      return;
+    }
+
+    const parser = new DOMParser();
+    const foundSrc = images
+      .map((image) =>
+        parser.parseFromString(image, "text/html").querySelector("img")
+      )
+      .map((image) => {
+        const { src } = image || { src: "" };
+
+        return src;
+      })
+      .find((src) => src.includes(imageid));
+
+    if (typeof foundSrc !== "string") {
+      router.replace(`/blog/article/${id}`);
+
+      return;
+    }
+
+    setMainSrc(foundSrc);
+  }, [article, id, imageid, router]);
+
   return (
     <>
       <Seo title={title} />
       <SWRConfig value={{ fallback }}>
-        <BlogArticleTop id={id} setMainSrc={setMainSrc} />
+        <BlogArticleTop id={id} />
       </SWRConfig>
       {typeof mainSrc === "string" ? (
         <Lightbox mainSrc={mainSrc} onCloseRequest={handleCloseRequest} />
@@ -76,6 +118,7 @@ export const getStaticProps: GetStaticProps<IdProps> = async ({
 
   return {
     props: {
+      article,
       id,
       title,
       fallback: {

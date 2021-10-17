@@ -1,4 +1,6 @@
+@import "styles/breakpoints";
 @import "styles/mixins";
+@import "sass-mq";
 
 .wrapper {
   align-items: center;
@@ -11,11 +13,14 @@
   display: grid;
   gap: 24px;
   grid-template: "heading" "paragraph" auto / 1fr;
-  // TODO
   height: 480px;
   max-height: calc(100% - 64px * 2);
-  padding: 24px;
-  position: relative;
+  @include mq($until: tablet) {
+    padding: 24px;
+  }
+  @include mq($from: tablet) {
+    padding: 24px 36px;
+  }
 }
 
 .heading {
